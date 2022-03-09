@@ -14,11 +14,11 @@ describe("Cadastro", () => {
       email: "email@email.com",
       whatsapp: "11888888888",
       endereco: {
-        cep: "68901130",
+        cep: "69073821",
         estado: "AP",
         cidade: "Macapá",
         rua: "Rua Leopoldo Machado",
-        bairro: "Trem",
+        complemento: "Trem",
         numero: "10",
       },
     };
@@ -28,5 +28,11 @@ describe("Cadastro", () => {
     cy.get('input[name="email"]').type(entregador.email);
     cy.get('input[name="whatsapp"]').type(entregador.whatsapp);
     cy.get('input[name="postalcode"]').type(entregador.endereco.cep);
+    cy.get('input[type="button"][value="Buscar CEP"]').click();
+    //Bug no input da rua quando o cep nnao traz o endereço completo.
+    cy.get('input[name="address-number"]').type(entregador.endereco.numero);
+    cy.get('input[name="address-details"]').type(
+      entregador.endereco.complemento
+    );
   });
 });
